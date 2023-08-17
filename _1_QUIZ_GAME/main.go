@@ -11,7 +11,7 @@ import (
 
 func main() {
 	csvFilename := flag.String("csv", "problems.csv", "a csv file in the format of 'question,answer'")
-	timeLimit := flag.Int("time limit", 25, "The time liit fot he quiz")
+	// timeLimit := flag.Int("time limit", 25, "The time liit fot he quiz")
 	flag.Parse()
 	// _ = csvFilename
 
@@ -30,9 +30,10 @@ func main() {
 	}
 	problem := parseLines(lines)
 
+	fmt.Println(problem)
+
 	timer := time.NewTimer(time.Duration(*timeLimit) * time.Second)
 
-	// <-timer.C
 
 	correct := 0
 
@@ -54,15 +55,6 @@ func main() {
 			if answer == p.a {
 				correct++
 			}
-			// default:
-
-			// 	var answer string
-			// 	fmt.Scanf("%s\n", &answer)
-
-			// 	if answer == p.a {
-			// 		fmt.Println("Correct")
-			// 		correct++
-			// 	}
 		}
 
 	}

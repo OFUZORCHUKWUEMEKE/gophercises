@@ -6,10 +6,13 @@ import (
 	cyoa "gophercises/_3_ADVENTURE/story"
 	"net/http"
 	"os"
+	"strings"
 )
 
 func main() {
+
 	port := flag.Int("port", 3000, "the port to start the CYOA web application on")
+
 	filename := flag.String("file", "gopher.json", "the json file with the cyao")
 	flag.Parse()
 
@@ -34,5 +37,16 @@ func main() {
 	fmt.Printf("%v+v\n", story)
 
 	log.fatal(http.ListenAndServe(fmt.Sprintf(":%d", *port), h))
+
+}
+
+func pathFn(r *http.Request) string {
+
+	path := strings.TrimSpace(r.URL.Path)
+
+	if path == "/" || path == "/story/" {
+		path = "/story/intro"
+	}
+	return path[len("/story/"):]
 
 }
